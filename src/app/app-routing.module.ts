@@ -4,21 +4,26 @@ import { RaceSeasonsComponent } from './race-seasons';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'races',
+    pathMatch: 'full',
+  },
+  {
     path: 'races',
     component: RaceSeasonsComponent,
-    children: [
-      {
-        path: ':input',
-        loadComponent: () =>
-          import('./app-child.component').then((m) => m.default),
-      },
-    ],
+  },
+  {
+    path: 'races/:input',
+    loadComponent: () =>
+      import('./race-season-details/race-season-details.component').then(
+        (c) => c.RaceSeasonDetailsComponent
+      ),
   },
   {
     path: '**',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./page-not-found.component').then((m) => m.PageNotFoundComponent),
+      import('./page-not-found.component').then((c) => c.PageNotFoundComponent),
   },
 ];
 
